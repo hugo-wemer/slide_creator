@@ -1,4 +1,5 @@
 import os
+from pptx import Presentation
 
 def start():
     print("*********************************************")
@@ -31,8 +32,15 @@ def select_song():
 
 def read_lyrics():
     lyric = open(complete_dir_file, 'r')
+    index = 0
+    pptx_dir = dir + "Teste.pptx"
+    prs = Presentation(pptx_dir)
     for line in lyric:
-        print(line) #TRATAR DAQUI
+
+        print(line)
+
+
+
 
 start()
 files_verification()

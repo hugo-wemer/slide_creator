@@ -32,21 +32,30 @@ def select_song():
 
 def read_lyrics():
     lyric = open(complete_dir_file, 'r')
-    index = 0
+    index = 1
     prs = Presentation()
     title_slide_layout = prs.slide_layouts[0]
     slide = prs.slides.add_slide(title_slide_layout)
     title = slide.shapes.title
     subtitle = slide.placeholders[1]
+    title.text = selected_file.replace(".txt","").replace("-"," ").upper()
 
-    title.text = selected_file
-    subtitle.text = "python-pptx was here!"
-
-    pptx_name = selected_file + ".pptx"
-    prs.save(pptx_name)
+    subtitle.text = "meu caneco tá cheio"
 
     for line in lyric:
+        #title_line = prs.slide_layouts[1]
+        #title.text = "line"
         print(line.strip('\n'))
+        slide_layout = prs.slide_layouts[0]
+        slide = prs.slides.add_slide(slide_layout)
+
+#COMENTARIO 3
+
+    pptx_name = selected_file + ".pptx"
+    pptx_name = pptx_name.replace(".txt","")
+    prs.save(pptx_name)
+
+
 
 
 

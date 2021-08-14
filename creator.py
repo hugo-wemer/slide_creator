@@ -37,19 +37,14 @@ def read_lyrics():
     title_slide_layout = prs.slide_layouts[0]
     slide = prs.slides.add_slide(title_slide_layout)
     title = slide.shapes.title
-    subtitle = slide.placeholders[1]
     title.text = selected_file.replace(".txt","").replace("-"," ").upper()
 
-    subtitle.text = "meu caneco tá cheio"
 
     for line in lyric:
-        #title_line = prs.slide_layouts[1]
-        #title.text = "line"
-        print(line.strip('\n'))
-        slide_layout = prs.slide_layouts[0]
-        slide = prs.slides.add_slide(slide_layout)
-
-#COMENTARIO 3
+        lyric_slide = prs.slide_layouts[0]
+        slide = prs.slides.add_slide(lyric_slide)
+        title = slide.shapes.title
+        title.text = "Teste"
 
     pptx_name = selected_file + ".pptx"
     pptx_name = pptx_name.replace(".txt","")

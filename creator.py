@@ -32,19 +32,31 @@ def select_song():
 
 def read_lyrics():
     lyric = open(complete_dir_file, 'r')
-    index = 1
+    index = 0
     prs = Presentation()
     title_slide_layout = prs.slide_layouts[0]
     slide = prs.slides.add_slide(title_slide_layout)
     title = slide.shapes.title
     title.text = selected_file.replace(".txt","").replace("-"," ").upper()
-
+    paragraphy = []
+    inv_o = ""
 
     for line in lyric:
+        line = line.strip('\n')
+        print(line)
+        if(line != ""):
+            inp = inv_o + '\n' + line
+            paragraphy.insert(index, inp)
+        else:
+            index += 1
+        inv_o = line
+    print(paragraphy)
+
+    for par in paragraphy:
         lyric_slide = prs.slide_layouts[0]
         slide = prs.slides.add_slide(lyric_slide)
         title = slide.shapes.title
-        title.text = "Teste"
+        title.text = par
 
     pptx_name = selected_file + ".pptx"
     pptx_name = pptx_name.replace(".txt","")

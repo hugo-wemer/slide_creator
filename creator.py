@@ -1,6 +1,12 @@
 import os
-from pptx import Presentation
-from pptx.util import Pt
+from pptx import Presentation, util, text
+from pptx.enum.text import MSO_AUTO_SIZE, PP_PARAGRAPH_ALIGNMENT
+from pptx.util import Pt, Cm
+from pptx.dml.color import RGBColor
+from pptx.enum.dml import MSO_THEME_COLOR_INDEX
+
+
+from pptx.enum.text import MSO_VERTICAL_ANCHOR, MSO_AUTO_SIZE
 
 
 def start():
@@ -50,26 +56,42 @@ def read_lyrics():
         line = line.strip('\n')
         if(line != ""):
             if(i == 0):
-                paragraphy = line
+                paragraph = line
             else:
-                paragraphy = paragraphy + "\n" + line
+                paragraph = paragraph + "\n" + line
         else:
-            par.append(paragraphy)
-            paragraphy = ""
+            par.append(paragraph)
+            paragraph = ""
 
         i += 1
-
-    par.append(paragraphy)
+    par.append(paragraph)
 
     for ls in par:
-        #print(ls)
-        lyric_slide = prs.slide_layouts[0]
-        slide = prs.slides.add_slide(lyric_slide)
-        title = slide.shapes.title
-        title.text = ls
-        print(ls)
 
-    #print(par)
+        lyric_slide = prs.slide_layouts[6]
+        slide = prs.slides.add_slide(lyric_slide)
+
+        title = slide.shapes.add_textbox(left = Cm(0), top = Cm(5), width = Cm(20), height = Cm(10))
+
+        #title.word_wrap = True
+
+        #title.left = Cm(10)
+        #title.top = Pt(0)
+        #title.width = Pt(10)
+        #title.height = Pt(7.5)
+
+        lyr = title.text_frame
+        p = lyr.add_paragraph()
+        p.text = ls
+        p.font.size = Pt(30)
+        p.alignment = PP_PARAGRAPH_ALIGNMENT.CENTER
+        p.word_wrap = True
+        #p.left = Cm(10)
+        #p.top = Cm(0)
+        #p.width = Cm(5)
+        #p.height =Cm(7.5)
+
+
     pptx_name = selected_file + ".pptx"
     pptx_name = pptx_name.replace(".txt", "")
     prs.save(pptx_name)
